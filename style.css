@@ -1,0 +1,10 @@
+td {
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 2em;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
