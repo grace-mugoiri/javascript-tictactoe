@@ -28,13 +28,22 @@ const colors = Object.freeze({
 });
 
 function gameOver(gameWon) {
-	
+	for (const index of winCombos[gameWon.index]) {
+	  document.getElementById(index).style.backgroundColor =
+	  gameWon.player === humanPlayer ? colors[win] : colors[lose];
+	}
+	for (let i=0; i < cells.length; i++) {
+		cells[i].removeEventListener('click', turnClick);
+	}
+	declareWinner(gameWon.player === humanPlayer ? winStatus[win] : winStatus[lose]);
 }
 
 function checkWin(board, player) {
+	const plays = board.reduce((a, e, i) =>
+		((e === player ) ? a.concat(i) : a), []);
 	let gameWon = null;
 	for(const [index, win] of winCombos.entries()) {
-		if (win.every(element => element === player)) {
+		if (win.every(element => plays.indexOf(elem) - 1)) {
 			gameWon = { index, player };
 			break;
 		}
