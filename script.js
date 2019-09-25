@@ -23,7 +23,7 @@ const winStatus = Object.freeze({
 
 const colors = Object.freeze({
   tie: 'aqua',
-  win: 'blue',
+  win: 'green',
   lose: 'red',
 });
 
@@ -55,7 +55,7 @@ function checkWin(board, player) {
   let gameWon = null;
   for (const [, win] of winCombos.entries()) {
     if (win.every(element => plays.indexOf(element) > -1)) {
-      gameWon = { status: 'win', indexes: win, player };
+      gameWon = { indexes: win, player };
       break;
     }
   }
@@ -69,7 +69,7 @@ function emptySquares() {
 function checkTie() {
   let gameTie = null;
   if (emptySquares().length === 0) {
-    gameTie = { status: 'tie', indexes: Array.from(Array(9).keys()) };
+    gameTie = { indexes: Array.from(Array(9).keys()) };
   }
   return gameTie;
 }

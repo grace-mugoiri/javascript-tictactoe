@@ -1,15 +1,23 @@
 # Tic Tac Toe - Javascript
-building a tic tac toe game that plays humans vs computer
+Building a tic tac toe game that plays humans vs computer.
+
 To learn more about Minimax algorithm, follow this => [Wikipedia](https://en.wikipedia.org/wiki/Minimax)
 
 This is part of the Javascript Constructor Project in the Odin Project's Javascript Curriculum. <br />
 Find it at [here](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript).
 
 ## Technologies
+- Javascript: ECMAScript 2018 (es6)
 - HTML 5
 - CSS 3
-- Bootstrap 4.3
-- Javascript: ECMAScript 2018 (es6)
+
+# How to play the game
+- Board will be an empty grid of (3 x 3) at the beginning of the game.
+- To start, the human player will choose a grid and it will be represented with "O", and
+	the computer will automatically be given the chance to play and will be represented with "X".
+- The game will go on until all grids are filled or if a winner is determined.
+- A winner will only be determined if the combiantions as set in the game are fulfilled.
+- The game can also be a tie if none of the players hits the winning combinations and all grids are filled.
 
 ## Deployment
 
