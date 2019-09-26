@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 		<title> Javascript Tic Tac Toe</title>
 	</head>
 	<body>
@@ -26,9 +26,13 @@
 		</table>
 		<div class="endgame">
 			<div class="text"></div>
-			<button onClick="startGame()">Replay</button>
+			<button onClick="ui_controller.startGame()">Replay</button>
 		</div>
 
-		<script src="script.js"></script>
+		<script src="./assets/js/best_spot.js"></script>
+		<script src="./assets/js/game_board.js"></script>
+		<script src="./assets/js/game_rule.js"></script>
+		<script src="./assets/js/player.js"></script>
+		<script src="./assets/js/ui_controller.js"></script>
 	</body>
 </html>
