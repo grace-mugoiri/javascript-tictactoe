@@ -1,11 +1,15 @@
 const gameBoard = () => {
-  const board = Array.from(Array(9).keys());
-  const updateBoard = (piece, position) => {
-    board[position] = piece;
+  const grid = Array.from(Array(9).keys());
+
+  const validPosition = position => typeof grid[position] === 'number';
+
+  const updateBoard = (position, piece) => {
+    grid[position] = piece;
   };
 
-  // function emptySquares() {
-  //   return originalBoard.filter(cell => typeof cell === 'number');
-  // }
-  return { board, updateBoard };
+  const emptySquares = () => grid.filter(cell => validPosition(cell));
+
+  return {
+    grid, updateBoard, emptySquares, validPosition,
+  };
 };

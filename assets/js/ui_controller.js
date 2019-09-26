@@ -1,104 +1,108 @@
+/* eslint-env browser */
+
 const uiController = (() => {
   let displayBoard = null;
   let humanPlayer = null;
   let aiPlayer = null;
+  // let playerName = null;
 
   const resetObject = () => {
     displayBoard = gameBoard();
     humanPlayer = player('user', 'O');
     aiPlayer = player('Computer', 'X');
-	};
-	const colors = Object.freeze({
-		win : 'green',
-		tie : 'aqua',
-		lose : 'red',
-	});
+  };
+  const colors = Object.freeze({
+    win: 'green',
+    tie: 'aqua',
+    lose: 'red',
+  });
 
-	const winStatus = Object.freeze({
-		win : 'You Win!',
-		tie : 'Tie Game!',
-		lose : 'You Lose!',
-	});
+  const winStatus = name => ({
+    // win: 'You Win!',
+    // lose: 'You Lose!',
+    win: `${name} win!`,
+    lose: 'Computer win!',
+    tie: 'Tie Game!',
+  });
 
-	const cells = document.querySelectorAll('.cell');
+  const cells = document.querySelectorAll('.cell');
 
   const resetDisplay = () => {
+    document.querySelector('.endgame').style.display = 'none';
+    for (let i = 0; i < 9; i++) {
+      cells[i].innerText = '';
+      cells[i].style.removeProperty('background-color');
+    }
+  };
 
-    // .endgame display none
-    // each cell text empty
-    // each cell background color remove
-	};
-
-	const bestSpot = () => {
-		return displayBoard.emptySquares()[0];
-	};
+  const aiBestSpot = () => bestSpot(displayBoard, humanPlayer, aiPlayer).getSpot();
 
   const turnClick = (square) => {
-		// if (typeof displayBoard[square.target.id] === 'number') {
-			// valid check?
-			gameRule.turn(displayBoard, square.target.id, humanPlayer);
-			console.log(square.target.id)
-		// };
-    // valid?
-		// turn user
+    if (displayBoard.validPosition(square.target.id)) {
+      if (gameRule.turn(displayBoard, square.target.id, humanPlayer) === 'continue') {
+        gameRule.turn(displayBoard, aiBestSpot(), aiPlayer);
+      }
+    }
+  };
 
-		// turn ai
-		// turn(bestSpot(), aiPlayer);
-
-	};
-
-	const displayPosition = (squareId, {piece}) => {
-		document.getElementById(squareId).innerText = piece;
-
-	};
+  const displayPosition = (squareId, { piece }) => {
+    document.getElementById(squareId).innerText = piece;
+  };
 
   const addClickForEachCell = () => {
-		// for each cell click add
-		for (let i=0; i < 9; i++){
-		cells[i].addEventListener('click', turnClick);
-		};
+    for (let i = 0; i < 9; i++) {
+      cells[i].addEventListener('click', turnClick);
+    }
   };
 
   const gameOverState = (player) => {
     let message;
-    if (game.player === humanPlayer) {
+    if (player === humanPlayer) {
       message = 'win';
-    } else if (game.player === aiPlayer) {
+    } else if (player === aiPlayer) {
       message = 'lose';
     } else {
       message = 'tie';
     }
     return message;
-	};
+  };
 
 
   const declareWinner = (who) => {
-		document.querySelector('.endgame .text').innerText = who;
-		document.querySelector('.endgame').style.display = "block";
+    document.querySelector('.endgame .text').innerText = who;
+    document.querySelector('.endgame').style.display = 'block';
   };
 
   const gameOver = ({ player, indexes }) => {
-		const message = gameOverState(player);
-		for (const index of game.indexes) {
-			document.getElementById(index).style.backgroundColor = colors[message];
-		}
-		for (let i = 0; i < cells.length; i++) {
-			cells[i].removeEventListener('click', turnClick);
-		}
-		declareWinner(winStatus);
-    // backgroundColor setting
-    // remove click
-    // declareWinner
+    const message = gameOverState(player);
+    for (const index of indexes) {
+      document.getElementById(index).style.backgroundColor = colors[message];
+    }
+    for (let i = 0; i < cells.length; i++) {
+      cells[i].removeEventListener('click', turnClick);
+    }
+    declareWinner(winStatus[message]);
+  };
+
+  const getName = () => {
+    // reveal the box to ask name
+    // if it is not reveal with popup, we should move board more below.
+    // get name with button click
+    // save name to user's name
+    const obj = document.querySelector('.name-input');
+    // console.log(obj.value);
+    // save
+    // winStatus(obj.value).win;
+    return obj.value;
   };
 
   const startGame = () => {
     resetObject();
-    // ask name
+    getName();
     resetDisplay();
     addClickForEachCell();
-	};
-	return {startGame, displayPosition};
-
+  };
+  return { startGame, displayPosition, gameOver };
 })();
 
 uiController.startGame();
