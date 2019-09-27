@@ -25,7 +25,8 @@ table {
 	margin-top: 2rem;
 }
 
-.endgame {
+.endgame,
+.name-input-box {
 	display: none;
 	width: 240px;
 	position: absolute;
@@ -38,7 +39,13 @@ table {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	border: 1px solid black;
+	z-index: 10;
 }
+.name-input-box {
+	width: 500px;
+    margin-left: -250px;
+}
+
 
 button {
 	background-color: blue;
