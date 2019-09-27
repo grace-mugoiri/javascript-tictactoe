@@ -28,22 +28,31 @@ table {
 .endgame,
 .name-input-box {
 	display: none;
-	width: 240px;
 	position: absolute;
 	left: 50%;
-	margin-left: -120px;
 	top: 150px;
-	background-color: orange;
-	font-size: 40px;
+	background-color: #ffca28cf;
+	font-size: 35px;
 	text-align: center;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	border: 1px solid black;
 	z-index: 10;
 }
+
 .name-input-box {
 	width: 500px;
-    margin-left: -250px;
+  margin-left: -250px;
+}
+
+.name-input {
+	font-size: 35px;
+	width: 180px;
+}
+
+.endgame {
+	width: 240px;
+	margin-left: -120px;
 }
 
 

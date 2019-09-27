@@ -22,17 +22,17 @@ const gameRule = (() => {
     return gameWon;
   };
 
-  const checkTie = (board) => {
+  const checkTie = () => {
     let gameTie = null;
-    if (board.emptySquares().length === 0) {
+    if (gameBoard.emptySquares().length === 0) {
       gameTie = { indexes: Array.from(Array(9).keys()) };
     }
     return gameTie;
   };
 
-  const checkWinOrTie = (board, player) => {
-    const gameWon = checkWin(board.grid, player);
-    const gameTie = checkTie(board);
+  const checkWinOrTie = (player) => {
+    const gameWon = checkWin(gameBoard.getGrid(), player);
+    const gameTie = checkTie();
     if (gameWon || gameTie) {
       uiController.gameOver(gameWon || gameTie);
       return true;
@@ -40,10 +40,10 @@ const gameRule = (() => {
     return false;
   };
 
-  const turn = (board, positionId, player) => {
-    board.updateBoard(positionId, player.piece);
+  const turn = (positionId, player) => {
+    gameBoard.updateGrid(positionId, player.piece);
     uiController.displayPosition(positionId, player);
-    if (checkWinOrTie(board, player)) {
+    if (checkWinOrTie(player)) {
       return 'gameend';
     }
     return 'continue';

@@ -8,8 +8,8 @@
 	<body>
 		<h1 class="text-center game-title">Welcome to "Tic Tac Toe" game!</h1>
 		<div class="name-input-box">
-			<input class="name-input" placeholder="Player's Name"></input>
-			<strong> VS</strong> Computer
+			<input class="name-input" placeholder="Your Name"></input>
+			<strong> VS</strong> Computer <br />
 			<button onclick="uiController.startGame()">Start Game</button>
 		</div>
 		<table>
@@ -32,6 +32,7 @@
 		<div class="endgame">
 			<div class="text"></div>
 			<button onClick="uiController.startGame()">Replay</button>
+			<button onclick="uiController.refreshPlayer()">New Player</button>
 		</div>
 
 		<script src="./assets/js/best_spot.js"></script>

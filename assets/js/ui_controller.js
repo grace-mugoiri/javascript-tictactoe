@@ -1,33 +1,24 @@
 /* eslint-env browser */
 
 const uiController = (() => {
-  let displayBoard = null;
   let humanPlayer = null;
   let aiPlayer = null;
   let playerName = null;
 
-  const resetObject = () => {
-    displayBoard = gameBoard();
+  const colors = Object.freeze({
+    win: 'aqua',
+    tie: '#aed581',
+    lose: '#ef5350',
+  });
+
+  const createPlayer = () => {
     humanPlayer = player(playerName, 'O');
     aiPlayer = player('Computer', 'X');
   };
-  const colors = Object.freeze({
-    win: 'green',
-    tie: 'aqua',
-    lose: 'red',
-  });
-
-  const winStatus = name => ({
-    // win: 'You Win!',
-    // lose: 'You Lose!',
-    win: `${name} win!`,
-    lose: 'Computer win!',
-    tie: 'Tie Game!',
-  });
 
   const cells = document.querySelectorAll('.cell');
 
-  const resetDisplay = () => {
+  const resetResultDisplay = () => {
     document.querySelector('.endgame').style.display = 'none';
     for (let i = 0; i < 9; i++) {
       cells[i].innerText = '';
@@ -35,12 +26,12 @@ const uiController = (() => {
     }
   };
 
-  const aiBestSpot = () => bestSpot(displayBoard, humanPlayer, aiPlayer).getSpot();
+  const aiBestSpot = () => bestSpot(gameBoard.getGrid(), humanPlayer, aiPlayer).getSpot();
 
   const turnClick = (square) => {
-    if (displayBoard.validPosition(square.target.id)) {
-      if (gameRule.turn(displayBoard, square.target.id, humanPlayer) === 'continue') {
-        gameRule.turn(displayBoard, aiBestSpot(), aiPlayer);
+    if (gameBoard.validPosition(square.target.id)) {
+      if (gameRule.turn(square.target.id, humanPlayer) === 'continue') {
+        gameRule.turn(aiBestSpot(), aiPlayer);
       }
     }
   };
@@ -55,29 +46,27 @@ const uiController = (() => {
     }
   };
 
-  const gameOverState = (player) => {
-    let message;
-    if (player === humanPlayer) {
-      message = 'win';
-    } else if (player === aiPlayer) {
-      message = 'lose';
-    } else {
-      message = 'tie';
-    }
-    return message;
-  };
-
-
   const declareWinner = (player) => {
-		const innerText = player ? `${player.name} Win` :'Game Tie!';
+    const innerText = player ? `${player.name} Win` : 'Game Tie!';
     document.querySelector('.endgame .text').innerText = innerText;
     document.querySelector('.endgame').style.display = 'block';
   };
 
-  const gameOver = ({ indexes, player  }) => {
-    const message = gameOverState(player);
+  const getColors = (player) => {
+    let color;
+    if (player === humanPlayer) {
+      color = colors.win;
+    } else if (player === aiPlayer) {
+      color = colors.lose;
+    } else {
+      color = colors.tie;
+    }
+    return color;
+  };
+
+  const gameOver = ({ indexes, player }) => {
     for (const index of indexes) {
-      document.getElementById(index).style.backgroundColor = colors[message];
+      document.getElementById(index).style.backgroundColor = getColors(player);
     }
     for (let i = 0; i < cells.length; i++) {
       cells[i].removeEventListener('click', turnClick);
@@ -86,33 +75,39 @@ const uiController = (() => {
   };
 
   const getName = () => {
-
-    // reveal the box to ask name
-    // if it is not reveal with popup, we should move board more below.
-    // get name with button click
-    // save name to user's name
     playerName = document.querySelector('.name-input').value;
-    // console.log(obj.value);
-    // save
-    // winStatus(obj.value).win;
-	};
-	const askNameStart = () => {
-		document.querySelector('.name-input-box').style.display = 'block'
-	};
-	const askNameEnd = () => {
-		document.querySelector('.name-input-box').style.display = 'none';
-		document.querySelector('.name-input').value = '';
-	};
+    return playerName !== '';
+  };
+
+  const askNameReveal = () => {
+    document.querySelector('.name-input-box').style.display = 'block';
+  };
+
+  const askNameHide = () => {
+    document.querySelector('.name-input-box').style.display = 'none';
+    document.querySelector('.name-input').value = '';
+  };
+
+  const refreshPlayer = () => {
+    playerName = '';
+    askNameReveal();
+    resetResultDisplay();
+  };
 
   const startGame = () => {
-
-    resetObject();
-		getName();
-		askNameEnd();
-    resetDisplay();
+    gameBoard.resetGrid();
+    resetResultDisplay();
+    if (!playerName) {
+      if (!getName()) return;
+      askNameHide();
+      createPlayer();
+    }
     addClickForEachCell();
   };
-  return { startGame, displayPosition, gameOver, askNameStart };
+
+  return {
+    startGame, displayPosition, gameOver, askNameReveal, refreshPlayer,
+  };
 })();
 
-uiController.askNameStart();
+uiController.askNameReveal();

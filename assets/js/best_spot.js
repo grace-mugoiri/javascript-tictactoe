@@ -1,6 +1,6 @@
-const bestSpot = (board, humanPlayer, aiPlayer) => {
+const bestSpot = (originalBoard, humanPlayer, aiPlayer) => {
   const minimax = (newBoard, player) => {
-    const availSpots = board.emptySquares();
+    const availSpots = originalBoard.filter(cell => typeof cell === 'number');
 
     if (gameRule.checkWin(newBoard, player)) {
       return { score: -10 };
@@ -51,6 +51,6 @@ const bestSpot = (board, humanPlayer, aiPlayer) => {
 
     return moves[bestMove];
   };
-  const getSpot = () => minimax(board.grid, aiPlayer).index;
+  const getSpot = () => minimax(originalBoard, aiPlayer).index;
   return { getSpot };
 };

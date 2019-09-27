@@ -1,7 +1,7 @@
 # Tic Tac Toe - Javascript
-Building a tic tac toe game that plays humans vs computer.
+This is a project for building a Tic tac toe game that plays humans vs computer.
 
-To learn more about Minimax algorithm, follow this => [Wikipedia](https://en.wikipedia.org/wiki/Minimax)
+Tic tac toe game also uses Minimax algorithm for computer moves, to learn more about Minimax algorithm, follow this => [Wikipedia](https://en.wikipedia.org/wiki/Minimax)
 
 This is part of the Javascript Constructor Project in the Odin Project's Javascript Curriculum. <br />
 Find it at [here](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript).

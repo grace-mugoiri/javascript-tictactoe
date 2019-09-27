@@ -1,15 +1,20 @@
-const gameBoard = () => {
-  const grid = Array.from(Array(9).keys());
+const gameBoard = (() => {
+  const grid = null;
 
-  const validPosition = position => typeof grid[position] === 'number';
-
-  const updateBoard = (position, piece) => {
-    grid[position] = piece;
+  const resetGrid = () => {
+    this.grid = Array.from(Array(9).keys());
   };
 
-  const emptySquares = () => grid.filter(cell => validPosition(cell));
+  const getGrid = () => this.grid;
+  const validPosition = position => typeof this.grid[position] === 'number';
+
+  const updateGrid = (position, piece) => {
+    this.grid[position] = piece;
+  };
+
+  const emptySquares = () => this.grid.filter(cell => validPosition(cell));
 
   return {
-    grid, updateBoard, emptySquares, validPosition,
+    updateGrid, emptySquares, validPosition, resetGrid, getGrid,
   };
-};
+})();
