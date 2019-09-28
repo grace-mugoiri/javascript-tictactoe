@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+		<title> Javascript Tic Tac Toe</title>
+	</head>
+	<body>
+		<h1 class="text-center game-title">Welcome to "Tic Tac Toe" game!</h1>
+		<div class="name-input-box">
+			<input class="name-input" placeholder="Your Name"></input>
+			<strong> VS</strong> Computer <br />
+			<button onclick="uiController.startGame()">Start Game</button>
+		</div>
+		<table>
+			<tr>
+				<td class="cell" id="0"> </td>
+				<td class="cell" id="1"> </td>
+				<td class="cell" id="2"> </td>
+			</tr>
+			<tr>
+				<td class="cell" id="3"> </td>
+				<td class="cell" id="4"> </td>
+				<td class="cell" id="5"> </td>
+			</tr>
+			<tr>
+				<td class="cell" id="6"> </td>
+				<td class="cell" id="7"> </td>
+				<td class="cell" id="8"> </td>
+			</tr>
+		</table>
+		<div class="endgame">
+			<div class="text"></div>
+			<button onClick="uiController.startGame()">Replay</button>
+			<button onclick="uiController.refreshPlayer()">New Player</button>
+		</div>
+
+		<script src="./assets/js/best_spot.js"></script>
+		<script src="./assets/js/game_board.js"></script>
+		<script src="./assets/js/game_rule.js"></script>
+		<script src="./assets/js/player.js"></script>
+		<script src="./assets/js/ui_controller.js"></script>
+	</body>
+</html>
