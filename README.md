@@ -21,7 +21,7 @@ Find it at [here](https://www.theodinproject.com/courses/javascript/lessons/tic-
 
 ## Deployment
 
-- [Online Deployment](https://grace-mugoiri.github.io/javascript-tictactoe/index.html)
+- [Online Deployment](https://grace-mugoiri.github.io/javascript-tictactoe/)
 
 ## Contributors
 
