@@ -35,6 +35,10 @@ This is a collaborative project by us: [Suhyeon Jang](https://github.com/shjang7
 4. Push to the branch (git push origin feature/[chosen-name])
 5. Create a new Pull Request
 
+# screenshot of the live game
+<img width="671" alt="Screenshot 2022-09-02 at 15 16 11" src="https://user-images.githubusercontent.com/20679425/188140996-c9ca8077-a67f-4133-9a35-95ecf6b011ff.png">
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
